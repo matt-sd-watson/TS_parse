@@ -1,5 +1,5 @@
 # TS_parse
-https://github.com/matt-sd-watson/TS_parse/issues/1
+
 
 Python scripts dedicated to automated parsing of Agilent TapeStation 2200 run reports for input into a LIMS system. Scripts 
 have been written for both RNA samples going into NGS library prep as well as final DNA/RNA libraries that are compatible with an NGS 

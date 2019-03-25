@@ -72,7 +72,7 @@ qc_data_frame = pd.DataFrame({'size_bp': qc_data_to_list})
 qc_data_frame.size_bp = qc_data_frame.size_bp.astype(int)
 qc_data_frame[(qc_data_frame>650)] = np.nan
 
-# replace false values over 800 with 'None'
+# replace false values over 650 with 'None'
 qc_data_frame[['size_bp']] = qc_data_frame[['size_bp']].fillna(0).astype(int)
 qc_data_frame[['size_bp']] = qc_data_frame[['size_bp']].replace([0], '')
 

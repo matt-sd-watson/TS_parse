@@ -7,7 +7,7 @@ sequencing platform such as Illumina. The final CSV file output is compatible wi
 
 Features of the script parser include: 
   - Creation of a final standarized CSV file that can auto-populate a LIMS system with modifiable headers
-  - Ability to filter through common TapeStation 2200 assay errors such as expired screentapes, samples missing from wells, and marker(s)       not being detected
+  - Ability to filter through common TapeStation 2200 assay errors such as expired screentapes, samples missing from wells, blank wells,       and marker(s) not being detected
   - Retains the unique sample description input by the user into the assay
 
 Agilent Tapestation 2200 documentation: https://www.agilent.com/cs/library/usermanuals/public/G2964-90000_TapeStation_USR_ENU.pdf

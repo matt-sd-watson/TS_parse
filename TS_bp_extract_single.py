@@ -15,12 +15,12 @@ import csv
 import os
 import numpy as np
 
-# Parser will handle any errors from expired screentapes and failure to load samples into well
-# IMPORTANT- error will still be caused if the marker in a single well was not detected (no table to read)
+# will handle any errors from expired screentapes and failure to load samples into well
+# IMPORTANT- error will still be caused if the marker is a single well was not detected (no table to read)
 
 path = 'X:\\mwatson\\run_reports_avg_bp\\'
 
-txt = glob.glob(path+'2018-12-21*'+'*.pdf')
+txt = glob.glob(path+'2019-01-08*'+'*.pdf')
 print(txt)
 
 for filename in txt:
@@ -37,7 +37,7 @@ for filename in txt:
     df_2 = tb.convert_into(filename, "sample_id_output.csv", output_format="csv", encoding='utf-8',
                                pages=pages, area = [312.003,68.722,364.066,370.685], multiple_tables=True)
 
-fields_1 = ['Sample Description']
+fields_1 = ['Sample Description', 'Observations']
 fields_2 = ['Average Size [bp]']
 sample_id = pd.read_csv('sample_id_output.csv', skipinitialspace=True, usecols=fields_1)
 qc_data = pd.read_csv('qc_output.csv', skipinitialspace=True, usecols=fields_2)
@@ -45,7 +45,18 @@ qc_data = pd.read_csv('qc_output.csv', skipinitialspace=True, usecols=fields_2)
 qc_data_rename = qc_data.rename(index=str, columns={"Average Size [bp]":
     "size_bp"})
 qc_data_to_list = qc_data_rename.size_bp.tolist()
-id_df = pd.DataFrame(sample_id)
+
+# ignore floats while parsing string list to identify marker failures
+id_list = [x for x in sample_id.Observations.tolist() if str(x) != 'nan']
+
+error_warnings = "Marker(s)"
+for list in id_list:
+    if list.startswith(error_warnings):
+        raise Exception('Error- one or more sample markers were not detected in the run. Please repeat the assay.')
+else:
+    pass
+
+id_df = pd.DataFrame(sample_id)['Sample Description']
 
 # Drop empty rows produced from reading run reports with error warnings
 id_df_drop = id_df.dropna()
@@ -53,18 +64,15 @@ id_dedup_reset = id_df_drop.reset_index(drop=True)
 id_df_dedup = id_dedup_reset[id_dedup_reset.index % 2 != 1]
 id_df_final = id_df_dedup.reset_index(drop=True)
 
-
 # remove alternating list elements starting at 1 to isolate numerical bp values
 del qc_data_to_list[1::2]
 qc_data_frame = pd.DataFrame({'size_bp': qc_data_to_list})
 
-
-# treat dataframe as numerical to eliminate values corresponding to well failures
-# no library detected in well will correspond to bp of 650 or greater
+# treat dataframe as numerical to eliminate values corresponding to well failures (no library detected)
 qc_data_frame.size_bp = qc_data_frame.size_bp.astype(int)
 qc_data_frame[(qc_data_frame>650)] = np.nan
 
-# replace false values over 650 with 'None'
+# replace false values over 800 with 'None'
 qc_data_frame[['size_bp']] = qc_data_frame[['size_bp']].fillna(0).astype(int)
 qc_data_frame[['size_bp']] = qc_data_frame[['size_bp']].replace([0], '')
 

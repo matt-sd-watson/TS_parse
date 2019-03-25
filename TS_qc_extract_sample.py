@@ -20,7 +20,7 @@ import numpy as np
 
 path = 'X:\\1-Transfer\\Matthew Watson\\Sample Analysis\\Run Reports\\'
 
-txt = glob.glob(path+'2019-03-13*'+'*.pdf')
+txt = glob.glob(path+'2019-02-14*'+'*.pdf')
 print(txt)
 
 for filename in txt:
@@ -35,13 +35,23 @@ for filename in txt:
     df_2 = tb.convert_into(filename, "sample_id_output.csv", output_format="csv", encoding='utf-8',
                                pages=pages, area = [312.003,68.722,364.066,370.685], multiple_tables=True)
 
-fields_1 = ['Sample Description', 'RINe']
+fields_1 = ['Sample Description', 'RINe', 'Observations']
 fields_2 = ['% of Total']
 sample_id = pd.read_csv('sample_id_output.csv', skipinitialspace=True, usecols=fields_1)
 qc_data = pd.read_csv('qc_output.csv', skipinitialspace=True, usecols=fields_2)
 
+# ignore floats while parsing string list to identify marker failures
+id_list = [x for x in sample_id.Observations.tolist() if str(x) != 'nan']
+
+error_warnings = "Marker(s)"
+for list in id_list:
+    if list.startswith(error_warnings):
+        raise Exception('Error- one or more sample markers were not detected in the run. Please repeat the assay.')
+else:
+    pass
+
 qc_df = pd.DataFrame(qc_data)
-id_df = pd.DataFrame(sample_id)
+id_df = pd.DataFrame(sample_id).drop(['Observations'], axis=1)
 
 # Drop empty rows produced from reading run reports with error warnings
 id_df_drop = id_df.dropna()

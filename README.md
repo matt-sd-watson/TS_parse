@@ -4,7 +4,7 @@ Python scripts dedicated to automated parsing of Agilent TapeStation 2200 qualit
 
 **Features of the script parser include**: 
   - Creation of a final standarized CSV file that can auto-populate a LIMS system with modifiable headers
-  - Ability to filter through common TapeStation 2200 assay errors such as expired screentapes, samples missing from wells, blank wells,       and marker(s) not being detected
+  - Ability to filter through common TapeStation 2200 assay errors such as expired screentapes, accidental sample missing from wells,           intentionally blank wells, and marker(s) not being detected
   - Retains the unique sample description input by the user into the assay
   - Maintains the original order of samples processed as input by the user, with the option for alphnumerical sorting in the CSV
 

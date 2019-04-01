@@ -1,0 +1,1 @@
+The files contained in this folder correspond only to Tapestation 2200 PDF run reports that contain NGS libraries that are compatible with Illumina sequencing. For parsing of RNA samples, use the files contained in the RNA_sample folder. 

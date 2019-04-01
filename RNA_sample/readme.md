@@ -1,0 +1,1 @@
+The files contained in this folder correspond only to Tapestation 2200 PDF run reports that contain RNA sample traces that can be used to create an NGS library that is compatible with Illumina sequencing. For parsing of the final NGS library trace run reports, use the files contained in the NGS_library folder. 

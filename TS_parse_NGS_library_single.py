@@ -18,9 +18,9 @@ import numpy as np
 # will handle any errors from expired screentapes and failure to load samples into well
 # IMPORTANT- error will still be caused if the marker is a single well was not detected (no table to read)
 
-path = 'X:\\mwatson\\run_reports_avg_bp\\'
+path = 'X:\\1-Transfer\\Matthew Watson\\TapeStation 2200 RNA Analysis\\Run Reports\\'
 
-txt = glob.glob(path+'2019-01-08*'+'*.pdf')
+txt = glob.glob(path+'2019-03-14*'+'*.pdf')
 print(txt)
 
 for filename in txt:
@@ -72,7 +72,7 @@ qc_data_frame = pd.DataFrame({'size_bp': qc_data_to_list})
 qc_data_frame.size_bp = qc_data_frame.size_bp.astype(int)
 qc_data_frame[(qc_data_frame>650)] = np.nan
 
-# replace false values over 650 with 'None'
+# replace false values over 800 with 'None'
 qc_data_frame[['size_bp']] = qc_data_frame[['size_bp']].fillna(0).astype(int)
 qc_data_frame[['size_bp']] = qc_data_frame[['size_bp']].replace([0], '')
 
@@ -85,9 +85,12 @@ data_merged_rename = data_merged.rename(index=str, columns={"Sample Description"
 # Filter any sample wells that contain a description for an empty well
 fields_3 = ['BLANK', 'Blank', 'blank', 'None', 'none', 'NA', 'N/A', 'n/a', 'Ladder', 'WATER', 'water', 'Water']
 data_master = data_merged_rename[~data_merged_rename['Description'].isin(fields_3)]
+# If removal of a blank well produces a nan row, remove the nan rows from the final CSV
+data_master = data_master[pd.notnull(data_master['Description'])]
 
 # final CSV generated containing sample ID and bsp values
-data_to_write = pd.DataFrame(data_master).to_csv("TS_bp_output_single.csv", index=False)
+data_to_write_nan = pd.DataFrame(data_master).dropna(how='any')
+data_to_write = data_to_write_nan.to_csv("TS_bp_output_single.csv", index=False)
 print(data_master.to_string(index=False))
 
 os.remove("qc_output.csv")

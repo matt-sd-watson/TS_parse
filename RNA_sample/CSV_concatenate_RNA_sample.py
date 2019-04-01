@@ -23,7 +23,7 @@ with open('TS_parse_concatenate_sample.csv', 'r') as read:
     # Search the CSV file for contents. If file is empty, write column headers that are compatible for MISO (newline
     # to eliminate empty rows between values)
     read.seek(0)
-    first_char = read.read(1)  # get the first character
+    first_char = read.read(1)  # establish file contents by seeking first character
     if not first_char:
         with open('TS_parse_concatenate_sample.csv', 'w', newline='') as f:
             csv_writer = csv.writer(f)

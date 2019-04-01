@@ -9,4 +9,4 @@ Python scripts dedicated to automated parsing of Agilent TapeStation 2200 qualit
   - Maintains the original order of samples processed as input by the user, with the option for alphnumerical sorting in the CSV
   - Ability to use the corresponding concatenate files to merge multiple PDF scans into one CSV
 
-Agilent Tapestation 2200 documentation: https://www.agilent.com/cs/library/usermanuals/public/G2964-90000_TapeStation_USR_ENU.pdf
+Agilent Tapestation 2200 instrument documentation: https://www.agilent.com/cs/library/usermanuals/public/G2964-90000_TapeStation_USR_ENU.pdf

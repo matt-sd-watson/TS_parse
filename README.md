@@ -12,4 +12,5 @@ TS_parse ia a set of Python scripts that are dedicated to automated parsing of A
 **Additional Resources**
 
 Agilent Tapestation 2200 instrument documentation: https://www.agilent.com/cs/library/usermanuals/public/G2964-90000_TapeStation_USR_ENU.pdf
+
 MISO LIMS developed by OICR: http://tgac.github.io/miso-lims/

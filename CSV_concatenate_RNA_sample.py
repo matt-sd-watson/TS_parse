@@ -1,6 +1,6 @@
 """ The script file TS_parse_RNA_sample_single enables the user to extract the RIN, DV200, and sample description
-from a Tapestation 2200 PDF run report. This additional file gives the ability to concatenate multiple parsing runs from
-this parser in order to develop a final CSV that contains RNA samples from multiple TS assays
+from a Tapestation 2200 PDF run report containing RNA samples. This additional file gives the ability to concatenate multiple parsing
+runs from this parser in order to develop a final CSV that contains RNA samples from multiple TS assays
 """
 
 from TS_parse_RNA_sample_single import data_master

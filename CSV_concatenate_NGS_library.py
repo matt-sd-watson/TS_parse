@@ -1,6 +1,6 @@
 """ The script file TS_parse_NGS_library_single enables the user to extract the bp insert size and sample description
-from a Tapestation 2200 PDF run report. This additional file gives the ability to concatenate multiple parsing runs from
-this parser in order to develop a final CSV that contains libraries from multiple TS assays
+from a Tapestation 2200 PDF run report containing NGS libraries. This additional file gives the ability to concatenate multiple parsing
+runs from this parser in order to develop a final CSV that contains libraries from multiple TS assays
 """
 
 from TS_parse_NGS_library_single import data_master

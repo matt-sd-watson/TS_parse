@@ -77,7 +77,7 @@ fields_3 = ['BLANK', 'Blank', 'blank', 'None', 'none', 'NA', 'N/A', 'n/a', 'Ladd
 # Filter any sample wells that contain a description for an empty well
 data_master = data_rename_sorted[~data_rename_sorted['Description'].isin(fields_3)]
 data_to_write = pd.DataFrame(data_master).to_csv("TS_sample_qc_output.csv", index=False)
-print(data_master)
+print(data_master.to_string(index=False))
 
 os.remove('sample_id_output.csv')
 os.remove('qc_output.csv')

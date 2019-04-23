@@ -1,5 +1,7 @@
 # **__TS_parse__**
 
+**Note**: An update to the TapeStation analysis software as of April 23, 2019 has made the parsing scripts contained in this package redundant. For merging of the CSV files created through the 'Export Data' function in the software, use concatenate_CSV_export.py. 
+
 TS_parse is a set of Python scripts that is dedicated to automated parsing of Agilent TapeStation 2200 quality control (QC) run reports for input into a LIMS system. These scripts have been written for both RNA samples going into NGS library prep as well as the final DNA/RNA libraries that are compatible with an NGS sequencing platform such as Illumina. The final CSV file output is compatible with auto-populating a customized open-source LIMS system such as MISO, developed by members of the Ontario Institute for Cancer Research (OICR) and created originally by the Earlham Institute. 
 
 **Features of the script parser include**: 

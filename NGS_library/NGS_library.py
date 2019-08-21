@@ -16,15 +16,13 @@ import os
 # will handle any errors from expired screentapes and failure to load samples into well
 # IMPORTANT- error will still be caused if the marker is a single well was not detected (no table to read)
 
-
-def ngs_library(filepath, page_start=4):
+def ngs_library(filepath, page_start=4, ext=None):
 
     """@Function Arguments:
     @filepath: the directory containing the pdf to parse
-    @page_start: the page to begin parsing. For the majority of run reports, this value will correspond to page 4
-    """
+    @page_start: the page to begin parsing. For the majority of run reports, this value will correspond to page 4"""
 
-    txt = glob.glob(filepath + '*.pdf')
+    txt = glob.glob(filepath + '*%s*' % ext + '*.pdf')
     print(txt)
 
     for filename in txt:

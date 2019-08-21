@@ -82,7 +82,7 @@ def rna_sample(filepath, page_start=4):
     fields_3 = ['BLANK', 'Blank', 'blank', 'None', 'none', 'NA', 'N/A', 'n/a', 'Ladder', 'WATER', 'water']
     # Filter any sample wells that contain a description for an empty well
     data_master = data_rename_sorted[~data_rename_sorted['Description'].isin(fields_3)]
-    pd.DataFrame(data_master).to_csv("TS_sample_qc_output.csv", index=False)
+    pd.DataFrame(data_master).to_csv("TS_parse_RNA_sample.csv", index=False)
     print(data_master.to_string(index=False))
 
     os.remove('sample_id_output.csv')

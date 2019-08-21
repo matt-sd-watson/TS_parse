@@ -16,16 +16,17 @@ import os
 # will handle any errors from expired screentapes and failure to load samples into well
 # IMPORTANT- error will still be caused if the marker is a single well was not detected (no table to read)
 
+
 def ngs_library(filepath, page_start=4):
-    
-    """@Function Arguments: 
+
+    """@Function Arguments:
     @filepath: the directory containing the pdf to parse
     @page_start: the page to begin parsing. For the majority of run reports, this value will correspond to page 4
-    returns: a csv file containing the sample ID and average base_pair insert of each library
     """
+
     txt = glob.glob(filepath + '*.pdf')
     print(txt)
-   
+
     for filename in txt:
         with open(filename, 'rb') as f:
             pdf = pf.PdfFileReader(f)
@@ -91,8 +92,10 @@ def ngs_library(filepath, page_start=4):
 
         # final CSV generated containing sample ID and bsp values
         data_to_write_nan = pd.DataFrame(data_master).dropna(how='any')
+        data_to_write_nan["Size (bp)"] = data_to_write_nan["Size (bp)"].astype(int)
         data_to_write_nan.to_csv("TS_parse_library.csv", index=False)
-        print(data_master.to_string(index=False))
+        print(data_to_write_nan)
 
         os.remove("qc_output.csv")
         os.remove("sample_id_output.csv")
+        

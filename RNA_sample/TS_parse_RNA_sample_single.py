@@ -17,7 +17,7 @@ import os
 # IMPORTANT- error will still be caused if the marker in a single well was not detected (no table to read)
 
 
-def ngs_library(filepath, page_start=4):
+def rna_sample(filepath, page_start=4):
 
     """@Function Arguments:
     @filepath: the directory containing the pdf to parse

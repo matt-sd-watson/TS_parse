@@ -17,16 +17,15 @@ import os
 # IMPORTANT- error will still be caused if the marker in a single well was not detected (no table to read)
 
 
-def rna_sample(filepath, page_start=4):
+def rna_sample(file_path, page_start=4, ext=None):
 
     """@Function Arguments:
     @filepath: the directory containing the pdf to parse
-    @page_start: the page to begin parsing. For the majority of run reports, this value will correspond to page 4
-    returns: a csv file containing the sample ID, RIN, and DV200 value of each RNA sample analyzed"""
+    @page_start: the page to begin parsing. For the majority of run reports, this value will correspond to page 4"""
 
-    txt = glob.glob(filepath + '*.pdf')
+    txt = glob.glob(file_path + '*%s*' % ext + '*.pdf')
     print(txt)
-
+  
     for filename in txt:
         with open(filename, 'rb') as f:
             pdf = pf.PdfFileReader(f)

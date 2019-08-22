@@ -18,11 +18,17 @@ import os
 
 def ngs_library(filepath, page_start=4, ext=None):
 
-    """@Function Arguments:
+    """
+    Function Arguments:
     @filepath: the directory containing the pdf to parse
-    @page_start: the page to begin parsing. For the majority of run reports, this value will correspond to page 4"""
+    @page_start: the page to begin parsing. For the majority of run reports, this value will correspond to page 4 if thumbnail
+    electropherograms are selected
+    @ ext: a glob-accepted portion of the filename that allows for the parser to recognize the specific PDF. The
+    element can be any continuous portion of the PDF name
+    returns: a data frame of QC information that is also exported to simple CSV
+    """
 
-    txt = glob.glob(filepath + '*%s*' % ext + '*.pdf')
+    txt = glob.glob(file_path + '*%s*' % ext + '*.pdf')
     print(txt)
 
     for filename in txt:

@@ -7,7 +7,7 @@ import chardet as cht
 
 def concatenate_outputs(filepath): 
 
-    data_files = glob.glob(data_path+ '*.csv')
+    data_files = glob.glob(filepath+ '*.csv')
 
     master_data = []
 
